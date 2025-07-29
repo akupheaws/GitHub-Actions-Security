@@ -6,13 +6,13 @@ on:
       - opened
 
 permissions:
-  issues: write  # 👈 This is required to assign labels
+  issues: write  # 👈 This is essential for curl POST to /labels to work
 
 jobs:
   assign-label:
     runs-on: ubuntu-latest
     steps:
-      - name: Assign label
+      - name: Assign label if title contains "bug"
         if: contains(github.event.issue.title, 'bug')
         run: |
           curl -X POST \
